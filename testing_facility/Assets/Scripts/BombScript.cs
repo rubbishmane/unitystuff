@@ -6,16 +6,19 @@ public class BombScript : MonoBehaviour
 {
 
     public ParticleSystem ps;
+    public Renderer ThisObjectsRenderer;
 
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
+        ThisObjectsRenderer = GetComponent<Renderer>();
     }
     void OnCollisionEnter(Collision col)
     {
         
         ps.Play();
-        GameObject.GetComponent<Renderer>.enabled = false;
+        StartCoroutine(delayBeforeDestroy());
+        
         
         
     }
@@ -24,4 +27,13 @@ public class BombScript : MonoBehaviour
     {
         ps.Play();
     }
+    IEnumerator delayBeforeDestroy()
+    {
+        gameObject.SetActive(false);
+        yield return new WaitForSeconds(3f);
+        
+
+    }
+
+   
 }
