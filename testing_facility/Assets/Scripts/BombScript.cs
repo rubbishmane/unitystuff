@@ -29,8 +29,9 @@ public class BombScript : MonoBehaviour
     }
     IEnumerator delayBeforeDestroy()
     {
-        gameObject.SetActive(false);
+        
         yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
         
 
     }
