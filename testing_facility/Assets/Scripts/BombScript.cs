@@ -6,33 +6,26 @@ public class BombScript : MonoBehaviour
 {
 
     public ParticleSystem ps;
-    public Renderer ThisObjectsRenderer;
+    
+
+    public GameObject player;
 
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
-        ThisObjectsRenderer = GetComponent<Renderer>();
+        
+        
     }
     void OnCollisionEnter(Collision col)
-    {
-        
+    { 
         ps.Play();
-        StartCoroutine(delayBeforeDestroy());
-        
-        
-        
     }
 
-    void Explode()
+   
+
+    public void Deploy()
     {
-        ps.Play();
-    }
-    IEnumerator delayBeforeDestroy()
-    {
-        
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
-        
+        Instantiate(gameObject, new Vector3(player.transform.position.x, player.transform.position.y + 20, player.transform.position.z), Quaternion.identity);
 
     }
 

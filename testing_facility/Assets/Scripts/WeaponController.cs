@@ -13,21 +13,25 @@ public class WeaponController : MonoBehaviour
 
     public bool CanDrop;
 
+    BombScript BombScript;
+
+    
+
+    
+
     
     void Start()
     {
         CanDrop = true;
+        BombScript = bomb.GetComponent<BombScript>();
     }
     void FixedUpdate()
     {
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && bomb.activeSelf)
         {
-            Physics.Raycast(transform.position,Vector3.forward, out BombHit, maxDistance);
+
+            BombScript.Deploy();
             
-            Debug.Log(BombHit.distance);
-            CanDrop = false;
-            Instantiate(bomb, new Vector3(0, 20f, 0), Quaternion.identity);
-            StartCoroutine(dropDelay());
             
             
         }
